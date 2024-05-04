@@ -26,9 +26,6 @@ public class SensorDataEntity {
 	@Column(name = "sensor_type")
 	private String sensorType;
 	
-	@Column(name = "parked_type")
-	private String parkedType;
-	
 	@Column(name = "data")
 	private String data;
 	
