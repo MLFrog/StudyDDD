@@ -29,9 +29,9 @@ public class SensorDataEntity {
 	@Column(name = "data")
 	private String data;
 	
-	@Column(name = "createdat")
+	@Column(name = "created_at")
 	private Timestamp createdAt;
 	
-	@Column(name = "updatedat")
+	@Column(name = "updated_at")
 	private Timestamp updatedAt;
 }

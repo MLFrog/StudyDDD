@@ -40,6 +40,7 @@ public class DataBatchService {
 		try {
 			jsonString = new ObjectMapper().writeValueAsString(new DataObject());
 		} catch (JsonProcessingException e) {
+			log.error("Json 변환 실패");
 			e.printStackTrace();
 		}
 

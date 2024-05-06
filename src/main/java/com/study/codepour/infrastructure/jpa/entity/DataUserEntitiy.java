@@ -12,23 +12,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sensor_log")
-public class SensorLogEntity {
-	
+@Table(name = "data_user")
+public class DataUserEntitiy {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "log_id")
-	private Long logId;
+	@Column(name = "id")
+	private Long id;
 	
-	@Column(name = "sensor_id")
-    private Long sensorId;
+	@Column(name = "username")
+    private String userName;
 	
-	@Column(name = "owner")
-	private Long owner;
-	
-	@Column(name = "hash")
-	private String hash;
-	
+	@Column(name = "password")
+	private String password;
+
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	
