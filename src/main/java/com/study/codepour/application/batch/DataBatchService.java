@@ -27,7 +27,8 @@ public class DataBatchService {
 	
 	private final SensorDataJpaRepository dataRepository;
 	
-	@Scheduled(cron = "0/5 * * * * ?")
+//	@Scheduled(cron = "*/5 * * * * ?")
+	@Scheduled(cron = "0 0 */6 * * ?")
 	public void sensorDataScheduler() {
 		log.info("-----Schedule Start-----");
 		

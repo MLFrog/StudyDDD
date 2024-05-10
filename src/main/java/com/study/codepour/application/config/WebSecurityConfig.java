@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import lombok.RequiredArgsConstructor;
@@ -53,7 +55,13 @@ public class WebSecurityConfig {
        return authenticationConfiguration.getAuthenticationManager();
     }
     
-//	TODO : 준모 UserDetail 완료 되면 세팅 잡을 것
+    // TODO : 추후 제거될 항목
+    @Deprecated
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+      return NoOpPasswordEncoder.getInstance();
+    }    
+    
 //    @Bean
 //    public BCryptPasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
