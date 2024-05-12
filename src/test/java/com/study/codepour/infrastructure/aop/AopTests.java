@@ -13,16 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 public class AopTests {
 	
 	@Autowired
-	private AopTest test;
+	private AopTest tester;
 	
 	@Test
 	public void 테스트() {
-		this.aopTest();
+		this.tester.test();
 		
-		this.test.test();
-	}
-	
-	private void aopTest() {
-		log.info("함수가 불렸습니다.");
+		try {
+			throw new Exception("작동함?");
+		} catch (Exception e) {
+			log.info("예외 발생! 과연 AOP작동할까요?");
+		}
 	}
 }
