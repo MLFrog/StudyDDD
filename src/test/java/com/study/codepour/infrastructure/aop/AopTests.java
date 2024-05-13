@@ -17,12 +17,11 @@ public class AopTests {
 	
 	@Test
 	public void 테스트() {
-		this.tester.test();
-		
 		try {
-			throw new Exception("작동함?");
+			this.tester.test();
 		} catch (Exception e) {
 			log.info("예외 발생! 과연 AOP작동할까요?");
 		}
+	
 	}
 }
