@@ -75,6 +75,7 @@ public class DataBatchService {
 	 * 해당 계정으로 더미 로그를 주기적으로 생성하는 로직
 	 * @throws BatchException 
 	 */
+	@Scheduled(cron = "0 0 */6 * * ?")
 	public void sensorLogScheduler() throws BatchException {
 		log.info("-----Schedule Start-----");
 		
@@ -85,6 +86,7 @@ public class DataBatchService {
 		Integer sensorDataCount = sensorData.size();
 		Integer userCount = users.size();
 		Random rand = new Random();
+		rand.setSeed(System.currentTimeMillis());
 		UUID uuid = UUID.randomUUID();
 		
 		if (userCount < 1 || sensorDataCount < 1) {
@@ -92,12 +94,14 @@ public class DataBatchService {
 			throw new BatchException("데이터가 없습니다.");
 		}
 		
-		int randUser = rand.nextInt(userCount);
-		int randData = rand.nextInt(sensorDataCount);
+		int randUser = rand.nextInt(userCount - 1) + 1;
+		int randData = rand.nextInt(sensorDataCount - 1) + 1;
 		
-		entity.setSensorId(sensorDataCount > randData? Long.valueOf(randData) : 0);
-		entity.setOwner(userCount > randUser? Long.valueOf(randData) : 0);
+		entity.setSensorId(sensorDataCount > randData? Long.valueOf(randData) : 1);
+		entity.setOwner(userCount > randUser? Long.valueOf(randUser) : 0);
 		entity.setHash(Optional.ofNullable(String.valueOf(uuid)).orElse("Can't Extract Hash Data"));
+		entity.setCreatedAt(Timestamp.from(Instant.now()));
+		entity.setUpdatedAt(Timestamp.from(Instant.now()));
 		
 		this.logRepository.save(entity);
 		
