@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.study.codepour.infrastructure.jpa.entity.DataUserEntity;
-import com.study.codepour.infrastructure.jpa.repository.DataUserJpaRepository;
+import com.study.codepour.infrastructure.jpa.repository.UserDataJpaRepository;
 
 import io.jsonwebtoken.lang.Assert;
 import jakarta.annotation.PostConstruct;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 	
-	private final DataUserJpaRepository repository;
+	private final UserDataJpaRepository repository;
 
     @PostConstruct
     public void init() {
