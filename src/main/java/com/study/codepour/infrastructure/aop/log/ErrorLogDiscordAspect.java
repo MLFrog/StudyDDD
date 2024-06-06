@@ -3,7 +3,6 @@ package com.study.codepour.infrastructure.aop.log;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -30,9 +29,9 @@ public class ErrorLogDiscordAspect {
 	@Value("${infra.discord}")
 	private String webHookUrl;
 	
-	@Pointcut("execution(* com.study.codepour.application.test..*.*(..))"
-			+ " || execution(* com.study.codepour.application.batch..*.*(..))"
+	@Pointcut("execution(* com.study.codepour.application.batch..*.*(..))"
 			+ " || execution(* com.study.codepour.application.security..*.*(..))"
+			+ " || execution(* com.study.codepour.application.log..*.*(..))"
 			+ " || execution(* com.study.codepour.presentation..*.*(..))"
 			+ " || execution(* com.study.codepour.domain..*.*(..))")
 	public void packagePointcut() {

@@ -11,6 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.study.codepour.infrastructure.jpa.entity.DataUserEntity;
+import com.study.codepour.infrastructure.jpa.repository.DataUserJpaRepository;
+
+import io.jsonwebtoken.lang.Assert;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
+	
+	private final DataUserJpaRepository repository;
 
     @PostConstruct
     public void init() {
@@ -28,10 +34,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override	
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
+        	DataUserEntity userData = this.repository.findByUsername(username);
+        	
+        	Assert.notNull(userData, "계정이 없습니다.");
+        	
             List<GrantedAuthority> authList = new ArrayList<>();
             authList.add(new SimpleGrantedAuthority("ADMIN"));
             
-            return new User("Test", "1234", true, true, true, true, authList);
+            return new User(userData.getUsername(), userData.getPassword(), true, true, true, true, authList);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
