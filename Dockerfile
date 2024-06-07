@@ -8,7 +8,7 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 
 # 애플리케이션 빌드 (테스트 무시)
-RUN gradle clean build -x test --no-daemon
+RUN gradle clean build -x test --no-daemon --watch-fs=false
 
 # 2단계: 런타임 Java 환경 설정
 FROM openjdk:11
